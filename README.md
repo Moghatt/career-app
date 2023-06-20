@@ -1,113 +1,13 @@
-#
-
--   import logo.svg and main.svg
--   import Landing in App.js and render
-
-#### Styled Components
-
--   CSS in JS
--   Styled Components
--   have logic and styles in component
--   no name collisions
--   apply javascript logic
--   [Styled Components Docs](https://styled-components.com/)
--   [Styled Components Course](https://www.udemy.com/course/styled-components-tutorial-and-project-course/?referralCode=9DABB172FCB2625B663F)
-
-```sh
-npm install styled-components
-```
-
-```js
-import styled from "styled-components";
-
-const El = styled.el`
-    // styles go here
-`;
-```
-
--   no name collisions, since unique class
--   vscode-styled-components extension
--   colors and bugs
--   style entire react component
-
-```js
-const Wrapper = styled.el``;
-
-const Component = () => {
-    return (
-        <Wrapper>
-            <h1> Component</h1>
-        </Wrapper>
-    );
-};
-```
-
--   only responsible for styling
--   wrappers folder in assets
-
-#### Logo and Images
-
--   logo built in Figma
--   [Cool Images](https://undraw.co/)
-
-#### Logo
-
--   create <b>components</b> folder in source
--   create Logo.js
--   move import and image logic
--   export as default
--   utilize index.js
-
-#### React Router
-
--   Version 6
--   [React Router Docs](https://reactrouter.com/docs/en/v6)
-
-```sh
-npm install history@5 react-router-dom@6
-```
-
--   import four components
-
-```js
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-```
-
--   Connect to browser's URL with BrowserRouter
--   Routes instead of Switch
-
-```js
-
-<BrowserRouter>
-    <Routes>
-      <Route path="/" element={<div>Dashboard</div>} />
-      <Route path="/register" element={<div>Register</div>} />
-      <Route path="/landing" element={<Landing />} />
-      <Route path="*" element={<div>Error</div>}>
-    </Routes>
-</BrowserRouter>
-
-```
-
-```js
-<nav>
-    <Link to="/">Dashboard</Link>
-    <Link to="/register">Register</Link>
-    <Link to="/landing">Home</Link>
-</nav>
-```
-
--   go to Landing.js
-
-```js
 import { Link } from "react-router-dom";
 
 return (
-    <Link to="/register" className="btn btn-hero">
-        Login / Register
-    </Link>
+
+<Link to="/register" className="btn btn-hero">
+Login / Register
+</Link>
 );
-```
+
+````
 
 #### Setup Pages
 
@@ -138,7 +38,7 @@ return (
         </div>
     </Wrapper>
 );
-```
+````
 
 #### Auto Imports
 
