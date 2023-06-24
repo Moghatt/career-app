@@ -1,8 +1,9 @@
 
 import { useState, useEffect } from "react";
-import  Logo  from "../components/logo";
+import  {Logo,FormRow,Alert}  from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-import FormRow from "../components/FormRow";
+import { Link } from "react-router-dom";
+
 // global context and useNavigate later
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
     email: "",
     password: "",
     isMember: true,
+    showAlert: false
 };
 // if possible prefer local state
 // global state
@@ -18,29 +20,34 @@ function Register() {
     const [values, setValues] = useState(initialState);
 
     // global context and useNavigate later
-
+    const toggleMember = () => {
+      setValues(prev => ({ ...prev, isMember: !values.isMember }));
+    };
     const handleChange = (e) => {
         console.log(e.target.value);
         setValues((prev)=> ({...prev, [e.target.name]: e.target.value}));
+        
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(e.target);
+        console.log(values);
     };
     return (
         <Wrapper className="full-page">
             <form className="form" onSubmit={onSubmit}>
                 <Logo />
                 <h3>Login</h3>
-
-                {/* name field */}
-                <FormRow 
-                  name='name' 
-                  type='text' 
-                  value={values.name} 
-                  handleChange={handleChange} 
-                />
+                {values.showAlert && <Alert />}
+                {!values.isMember && (
+                    <FormRow
+                        type="text"
+                        name="name"
+                        value={values.name}
+                        handleChange={handleChange}
+                    />
+                )}
                 {/* email field */}
                 <FormRow 
                   name='email' 
@@ -48,9 +55,23 @@ function Register() {
                   value={values.email} 
                   handleChange={handleChange} 
                 />
+                {/* password field */}
+                <FormRow 
+                  name='password' 
+                  type='password' 
+                  value={values.password} 
+                  handleChange={handleChange} 
+                />
                 <button type="submit" className="btn btn-block">
                     submit
                 </button>
+              <p>
+                  {values.isMember ? "Not a member yet?" : "Already a member?"}
+
+                  <button type="button" onClick={toggleMember} className="member-btn">
+                      {values.isMember ? "Register" : "Login"}
+                  </button>
+              </p>
             </form>
 
         </Wrapper>
