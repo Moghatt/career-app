@@ -13,14 +13,13 @@ const initialState = {
     email: "",
     password: "",
     isMember: true,
-    showAlert: false
 };
 // if possible prefer local state
 // global state
 
 function Register() {
 
-  const { isLoading, showAlert } = useAppContext();
+  const { isLoading, showAlert,displayAlert,clearAlert } = useAppContext();
 
     const [values, setValues] = useState(initialState);
 
@@ -29,22 +28,27 @@ function Register() {
       setValues(prev => ({ ...prev, isMember: !values.isMember }));
     };
     const handleChange = (e) => {
-        console.log(e.target.value);
         setValues((prev)=> ({...prev, [e.target.name]: e.target.value}));
         
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log(e.target);
-        console.log(values);
-    };
+const onSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !name)) {
+        displayAlert();
+        return;
+    }
+    clearAlert()
+    console.log(values);
+    
+};
     return (
         <Wrapper className="full-page">
             <form className="form" onSubmit={onSubmit}>
                 <Logo />
                 <h3>Login</h3>
-                {values.showAlert && <Alert />}
+                {showAlert && <Alert />}
                 {!values.isMember && (
                     <FormRow
                         type="text"
