@@ -23,7 +23,7 @@ function Register() {
     const [values, setValues] = useState(initialState);
 
     // global context and useNavigate later
-      const { user,isLoading, showAlert,displayAlert,clearAlert, registerUser } = useAppContext();
+      const { user,isLoading, showAlert,displayAlert,clearAlert, setupUser } = useAppContext();
       const navigate = useNavigate();
     const toggleMember = () => {
       setValues(prev => ({ ...prev, isMember: !values.isMember }));
@@ -42,9 +42,10 @@ const onSubmit = (e) => {
     }
     const currentUser = { name, email, password};
     if(isMember){
-      console.log('already member')
+      setupUser({currentUser,endPoint:'login', alertText:"Login successful! Redirecting..."});
     } else {
-      registerUser(currentUser);}
+      setupUser({currentUser,endPoint:'register', alertText:"Registration successful! Redirecting..."})
+    }
 
     clearAlert()
     console.log(values);
