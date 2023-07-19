@@ -19,7 +19,7 @@ const register = async (req, res) => {
         user: {
             name: user.name,
             email: user.email,
-            lastNmae: user.lastNmae,
+            lastName: user.lastName,
         },
         token,
         location: user.location,
@@ -48,8 +48,8 @@ const login = async (req, res) => {
     res.status(StatusCodes.OK).json({ user, token, location: user.location });
 };
 
-const update = async (req, res) => {
+const updateUser = async (req, res) => {
     res.send("update user");
 };
 
-export { register, login, update };
+export { register, login, updateUser };
