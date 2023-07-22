@@ -41,11 +41,14 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre("save", async function () {
+    // console.log(this.modifiedPaths());
+    // console.log(this.isModified("name"));
+    console.log(this);
+    if (!this.isModified("password")) return;
     const salt = await bcrypt.genSalt(10);
-    console.log(this.password);
     this.password = await bcrypt.hash(this.password, salt);
     // await compare(requestPassword , currentPassword)
-    //   console.log(this.password);
+    console.log(this.password);
 });
 
 UserSchema.methods.createJWT = function () {
@@ -55,6 +58,7 @@ UserSchema.methods.createJWT = function () {
 };
 
 UserSchema.methods.comparePassword = async function (candidatePassword) {
+    console.log(this.password, candidatePassword);
     const isMatch = await bcrypt.compare(candidatePassword, this.password);
     return isMatch;
 };
