@@ -27,6 +27,15 @@ const initialState = {
     userLocation: userLocation || "",
     jobLocation: "",
     showSidebar: false,
+    isEditing: false,
+    editJobId: "",
+    position: "",
+    company: "",
+    // jobLocation
+    jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
+    jobType: "full-time",
+    statusOptions: ["pending", "interview", "declined"],
+    status: "pending",
 };
 const AppContext = React.createContext();
 
@@ -207,10 +216,10 @@ export const AppProvider = ({ children }) => {
                 "/auth/updateUser",
                 currentUser
             );
-
+            // console.log(data);
             // no token
-            const { user, location } = data;
-
+            const { user, location, token } = data;
+            // console.log(user, location);
             dispatch({
                 type: UPDATE_USER_SUCCESS,
                 payload: { user, location, token },
@@ -219,7 +228,7 @@ export const AppProvider = ({ children }) => {
             addUserToLocalStorage({
                 user,
                 location,
-                token: initialState.token,
+                token,
             });
         } catch (error) {
             if (error.response.status !== 401) {

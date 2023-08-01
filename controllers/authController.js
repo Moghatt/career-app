@@ -32,7 +32,7 @@ const login = async (req, res) => {
         throw new BadRequestError("Please enter all fields");
     }
     const user = await User.findOne({ email }).select("+password");
-    console.log(user);
+    // console.log(user);
     if (!user) {
         throw new UnAuthenticatedError("Invalid Credentials");
     }

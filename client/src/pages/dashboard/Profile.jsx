@@ -4,9 +4,9 @@ import { useAppContext } from "../../context/appContext";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 
 const Profile = () => {
-    const { user, userLocation, showAlert, displayAlert, updateUser, isLoading } =
+    const { user,showAlert, displayAlert, updateUser, isLoading } =
         useAppContext();
-        console.log(userLocation)
+        
     const [name, setName] = useState(user?.name);
     const [email, setEmail] = useState(user?.email);
     const [lastName, setLastName] = useState(user?.lastName);
